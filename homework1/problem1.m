@@ -3,13 +3,16 @@
 % Tanay Srinivasa, 15 Jan 2025 %
 % Time Spend on Problem: 2 Hours (15-Jan-25: 10:00 AM to 10:40 AM, 2:00 PM to 3:10 PM) %
 
+% Code Structure taken from Ruina Cornell Lec-3, ChatGPT was used to help with syntax for animation %
+
 % Plotting option as defined in Homework Guidelines %
 set(0,'DefaultAxesFontSize', 20)
 
-% Solve the ODE for the system %
+% Defining Paramters of System %
 p.k1 = 10; p.k2 = 20; p.l01 = 1; p.l02 = sqrt(2);
 p.m = 5; p.F = [5;1]; p.r_b_from_a = [2;0]; p.g = 10;
 
+% Defining time span and initial conditions %
 tend = 10; tspan = [0, tend];
 r0 = [1; -2]; v0 = [0; 0]; z0 = [r0; v0];
 
