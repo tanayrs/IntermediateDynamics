@@ -1,6 +1,7 @@
 % RO2102 Dynamics and Simulation %
 % Assignment-2; Problem-3 %
 % Tanay Srinivasa, 19 Jan 2025 %
+% Due Date: 24 Jan 2025 %
 % Time Spent on Problem: 2 Hour 15 Min(19-Jan-2025 12:45 PM to 1:30 PM, 5:30 PM to 7:00 PM) %
 
 %% Euler Method %%
