@@ -2,7 +2,7 @@
 % Assignment-2; Problem-10 %
 % Tanay Srinivasa, 25 Jan 2025 %
 % Due Date: 28 Jan 2025 %
-% Time Spent on Problem: 45 Min  %
+% Time Spent on Problem: 30 Min  %
 
 clc;
 clear all;
