@@ -12,7 +12,7 @@ close all;
 set(0, 'DefaultAxesFontSize', 20);
 
 % Initialising Parameters %
-p.k = 0; p.l0 = 1; p.g = 10; p.m = 1; p.time_scale = 2;
+p.k = 1; p.l0 = 1; p.g = 10; p.m = 1; p.time_scale = 2;
 
 % Initial Conditions %
 tstart = 0; tend = 10; tspan = [tstart, tend];
