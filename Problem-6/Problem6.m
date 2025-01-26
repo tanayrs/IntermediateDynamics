@@ -12,11 +12,11 @@ close all;
 set(0, 'DefaultAxesFontSize', 20);
 
 % Initialising Parameters %
-p.k = 1; p.l0 = 1; p.g = 10; p.m = 1; p.time_scale = 2;
+p.k = 1; p.l0 = 1; p.g = 10; p.m = 1; p.time_scale = 20;
 
 % Initial Conditions %
-tstart = 0; tend = 10; tspan = [tstart, tend];
-r0 = [0; 1.5]; v0 = [8;3]; z0 = [r0; v0];
+tstart = 0; tend = 100; tspan = [tstart, tend];
+r0 = [1; 1.5]; v0 = [0;0]; z0 = [r0; v0];
 
 % Function Definition %
 rhs = @(t,z) myrhs(t,z,p);
