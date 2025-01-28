@@ -2,7 +2,7 @@
 % Assignment-2; Problem-10 %
 % Tanay Srinivasa, 25 Jan 2025 %
 % Due Date: 28 Jan 2025 %
-% Time Spent on Problem: 30 Min  %
+% Time Spent on Problem: 1.5 Hour  %
 
 clc;
 clear all;
@@ -12,11 +12,11 @@ close all;
 set(0, 'DefaultAxesFontSize', 20);
 
 % Initialising Parameters %
-p.k = 1; p.l0 = 1; p.g = 10; p.m = 1; p.time_scale = 1;
+p.k = 10; p.l0 = 0; p.g = 10; p.m = 1; p.time_scale = 20000;
 
 % Initial Conditions %
-tstart = 0; tend = 10; tspan = [tstart, tend];
-r0 = [0; 0; -2]; v0 = [3;1;0]; z0 = [r0; v0];
+tstart = 0; tend = 5e4; tspan = [tstart, tend];
+r0 = [5; 50; 50]; v0 = [0;-30;30]; z0 = [r0; v0];
 
 % Function Definition %
 rhs = @(t,z) myrhs(t,z,p);
@@ -26,7 +26,7 @@ options = odeset('AbsTol', 1e-3, 'RelTol', 1e-3);
 solution = ode45(rhs,tspan,z0,options);
 
 plot_trajectory(solution,tspan)
-animate(solution,tspan,z0, p.time_scale);
+% animate(solution,tspan,z0, p.time_scale);
 
 function zdot = myrhs(t,z,p)
     k = p.k; m = p.m; g = p.g; l0 = p.l0;
@@ -95,12 +95,16 @@ function animate(solution, tspan, z0, time_scale)
 end
 
 function plot_trajectory(solution, tspan)
-    t = linspace(tspan(1),tspan(2),1000);
+    t = linspace(tspan(1),tspan(2),1e5);
     z_vals = deval(solution,t);
-    r_vals = z_vals(1:2,:);
+    r_vals = z_vals(1:3,:);
 
-    plot(r_vals(1,:),r_vals(2,:),'LineWidth',1.5, 'Color','w');
+    view(3);
+    plot3(r_vals(1,:),r_vals(2,:),r_vals(3,:),'LineWidth',1.5, 'Color','w');
     xlabel("x-position (m)", 'FontSize',20);
     ylabel("y-position (m)", 'FontSize',20);
+    zlabel("z-position (m)", 'FontSize',20);
+    axis equal;
+    grid on;
     title("Trajectory of mass");
 end
