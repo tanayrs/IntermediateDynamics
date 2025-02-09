@@ -1,5 +1,5 @@
 % RO2102 Dynamics and Simulation %
-% Assignment-2; Problem-10 %
+% Assignment-3; Problem-10 %
 % Tanay Srinivasa, 25 Jan 2025 %
 % Due Date: 28 Jan 2025 %
 % Time Spent on Problem: 1.5 Hour  %
@@ -12,17 +12,17 @@ close all;
 set(0, 'DefaultAxesFontSize', 20);
 
 % Initialising Parameters %
-p.k = 10; p.l0 = 0; p.g = 10; p.m = 1; p.time_scale = 20000;
+p.k = 5; p.l0 = 0; p.g = pi^2; p.m = 7; p.time_scale = 1;
 
 % Initial Conditions %
-tstart = 0; tend = 5e4; tspan = [tstart, tend];
-r0 = [5; 50; 50]; v0 = [0;-30;30]; z0 = [r0; v0];
+tstart = 0; tend = 2*pi*sqrt(p.m/p.k) - 0.1; tspan = [tstart, tend];
+r0 = [pi; -pi; exp(1)]; v0 = [1;2;-3]; z0 = [r0; v0];
 
 % Function Definition %
 rhs = @(t,z) myrhs(t,z,p);
 
 % Solving using ODE45 %
-options = odeset('AbsTol', 1e-3, 'RelTol', 1e-3);
+options = odeset('AbsTol', 1e-10, 'RelTol', 1e-10);
 solution = ode45(rhs,tspan,z0,options);
 
 plot_trajectory(solution,tspan)

@@ -1,5 +1,5 @@
 % RO2102 Dynamics and Simulation %
-% Assignment-2; Problem-8 %
+% Assignment-3; Problem-8 %
 % Tanay Srinivasa, 25 Jan 2025 %
 % Due Date: 28 Jan 2025 %
 % Time Spent on Problem: 1.5 Hour  %

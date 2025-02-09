@@ -1,5 +1,5 @@
 % RO2102 Dynamics and Simulation %
-% Assignment-2; Problem-9 %
+% Assignment-3; Problem-9 %
 % Tanay Srinivasa, 25 Jan 2025 %
 % Due Date: 28 Jan 2025 %
 % Time Spent on Problem: 2.5 Hours  %
@@ -12,10 +12,10 @@ close all;
 set(0,'DefaultAxesFontSize', 20);
 
 % Parameters %
-p.m = 1; p.g = 1; p.c = 1; time_scale = 5;
+p.m = 1; p.g = 1; p.c = 1; time_scale = 2;
 
 % Initial Conditions %
-tstart = 0; tend = 2.5; tspan = [tstart, tend];
+tstart = 0; tend = 10; tspan = [tstart, tend];
 r0 = [0; 0]; v0_scalar = 1; theta0 = pi/4; 
 v0 = [v0_scalar*cos(theta0); v0_scalar*sin(theta0)];
 z0 = [r0; v0];
