@@ -1,0 +1,27 @@
+function plot_error(rhs, tspan, z0, p)
+    steps = [0.1, 0.01, 0.001];
+    errors = [];
+    for i = 1:length(steps)
+        options = odeset('MaxStep',steps(i), 'Events',@hit_ground);
+        solution = ode45(rhs, tspan, z0, options)
+    
+        time = solution.x;
+        t = linspace(time(1), time(end), 100);
+        solution = deval(solution,t);
+    
+        v = solution(3:4,:);
+        v = sqrt((v(1,:).*v(1,:)) + (v(2,:).*v(2,:)));
+        y = solution(2,:);
+        ke = 0.5*p.m*v.*v;
+        pe = p.m*p.g*y;
+        te = ke+pe;
+    
+        errors(end+1) = solution(5,:) - te;
+    end
+
+    plot(steps, errors);
+    xlabel('Step Size');
+    ylabel('Error');
+    title('Effect of Inte')
+
+end
