@@ -15,8 +15,8 @@ set(0,'DefaultAxesFontSize', 20);
 p.m = 1; p.ka = 1; p.kb = 1; p.la = 1; p.lb = 2; p.g = 10;
 p.ca = 1; p.cb = 1; p.ra = [0; 0]; p.rb = [1; 0]; time_scale = 1;
 
-% Solving Statics %
-statics(p);
+% Solving Statics using solve %
+% statics(p);
 
 % Initial Conditions %
 tstart = 0; tend = 10; tspan = [tstart, tend];
@@ -29,11 +29,16 @@ options = odeset('AbsTol',1e-3, 'RelTol',1e-3);
 solution = ode45(rhs,tspan,z0,options);
 
 % Animation %
-animate(solution, tspan, z0, p, time_scale);
+% animate(solution, tspan, z0, p, time_scale);
 
 % Finding Equilibria using fsolve %
-    
-initial_guesses = [0.5, 0.5; 1, 1; -0.5, 0.5];
+mystatics = @(z) sum_of_forces(z(1:2),[0;0],p);
+options = optimoptions('fsolve', 'FunctionTolerance',1e-30, 'OptimalityTolerance',1e-8, 'MaxFunctionEvaluations',10000, 'MaxIterations',10000, 'Disp','off');
+[root, fval, exitflag] = fsolve(mystatics,z0(1:2),options);
+if exitflag < 1
+    disp('Tanay says: FSOLVE is not happy. We want fval to be close to zeros.');
+    fval
+end
 
-% Find equilibria
-equilibria = find_equilibria(p, initial_guesses)
+disp('The x and y equilibrium point is')
+disp(root);

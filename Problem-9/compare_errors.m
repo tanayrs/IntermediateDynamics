@@ -20,8 +20,6 @@ function retval = compare_errors(x_fun, y_fun, rhs, tspan, z0, p)
         errors_y(i) = abs(error_y);
     end
 
-    errors_x
-    errors_y
     scatter(steps,errors_x, 'Color','r');
     hold on;
     xscale log;

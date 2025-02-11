@@ -108,3 +108,13 @@ function plot_trajectory(solution, tspan)
     grid on;
     title("Trajectory of mass");
 end
+
+%% Comments for part (b) and part (c) %%
+
+% Irrespective of the initial conditions and the parameters, at most, given
+% a zero length spring in 3-D, the wildest moiton you can obtain is a
+% elliptical motion, which for some special cases is limited to a line. The
+% analytical reason for this is when solved analytically, the equations of
+% motion unfold to be a simple harmonic oscillator in three dimensions.
+% For non zero gravity, there is an additional particular solution which is
+% also added to the equation of a harmonic oscillator.

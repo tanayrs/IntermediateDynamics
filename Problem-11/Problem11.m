@@ -1,6 +1,6 @@
 % RO2102 Dynamics and Simulation %
 % Assignment-4; Problem-11 %
-% Tanay Srinivasa, 25 Jan 2025 %
+% Tanay Srinivasa, 9 Feb 2025 %
 % Due Date: 11 Feb 2025 %
 % Time Spent on Problem: 1 Hour  %
 
@@ -11,10 +11,10 @@ close all;
 set(0, 'DefaultAxesFontSize', 20);
 
 % Parameters
-p.k = 100; p.n = -pi/10; p.m = 7;
+p.k = 100; p.n = imag(pi/10); p.m = 7;
 
 % Initial Conditions
-r0 = [3; 0]; v0 = [0; 2]; z0 = [r0; v0];
+r0 = [1; 0]; v0 = [0.1; -0.1]; z0 = [r0; v0];
 
 tstart = 0; tend = 100;
 tspan = [tstart, tend];
@@ -37,8 +37,9 @@ function zdot = myrhs(t, z, p)
     v = z(3:4);
     
     r_norm = norm(r);
+    v_norm = norm(v);
     
-    F = -k * r_norm^n * (r / r_norm);
+    F = -k * exp(-imag(v_norm)*t) * (r / r_norm);
     
     rddot = F / m;
     
