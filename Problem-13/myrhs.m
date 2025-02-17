@@ -1,6 +1,9 @@
 function zdot = myrhs(z,t,p)
-    m = p.m; g = p.g; ka = p.ka; kb = p.kb; la = p.la; lb = p.lb; 
-    ca = p.ca; cb = p.cb; ra = p.ra; rb = p.rb; 
+    % m = p.m; g = p.g; ka = p.ka; kb = p.kb; la = p.la; lb = p.lb; 
+    % ca = p.ca; cb = p.cb; ra = p.ra; rb = p.rb;
+
+    m = p.m; g = p.g; ka = p.kA; kb = p.kB; la = p.LA; lb = p.LB;
+    ca = p.cA; cb = p.cB; ra = p.rA; rb = p.rB;
 
     r = z(1:2);
     v = z(3:4);
@@ -10,7 +13,7 @@ function zdot = myrhs(z,t,p)
 
 
     Fsa = -ka*(l_ac-la)*lambda_ac;
-    Fsb = -ka*(l_bc-lb)*lambda_bc;
+    Fsb = -kb*(l_bc-lb)*lambda_bc;
     Fda = -ca*dot(v,lambda_ac)*lambda_ac;
     Fdb = -cb*dot(v,lambda_bc)*lambda_bc;
     
