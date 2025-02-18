@@ -7,15 +7,18 @@ clear all;
 close all;
 
 % Define Parameters
-p.G = 6.67 * 1e-11; p.m1 = 1; p.m2 = 1e5;
-time_scale = 1e10;
+p.G = 6.67 * 1e-11; p.m1 = 1; p.m2 = 1;
 
 % Define Time Span
-r10 = [0; 0]; r20 = [1e5; 0]; v10 = [0; 8.167006795638167e-06]; v20 = [0; 0];
-z0 = [r10; r20; v10; v20];
+r10 = [0; 0]; r20 = [1e5; 0]; 
 
 time_period = 2*pi*sqrt(norm(r20-r10)^3/(p.G*max(p.m1,p.m2)));
+time_scale = time_period/10;
+w = 2*pi/time_period;
 tstart = 0; tend = time_period; tspan = [tstart tend];
+
+v10 = [0; w*norm(r20-r10)]; v20 = [0; 0];
+z0 = [r10; r20; v10; v20];
 
 % Finding EoM
 rhs = @(t, z) myrhs(z,t,p);
