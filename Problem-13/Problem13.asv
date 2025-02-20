@@ -55,14 +55,7 @@ shg;
 
 %% Equilibrium
 
-rA = [0 ;  0] ;  rB = [3 ; 0];
-kA = 5;  LA = 5;  cA = 0  ;
-kB = 5;  LB = 5;  cB = 0  ;
-m  = 1;  g  = 1;  c  =  .2;
-
-mydynamics = @(z)  ...
-                   myzdots(z,rA,rB, kA,LA, cA, kB,LB,cB,m,g,c);
-
+mydynamics = @(z) myzdots(z, p.ra, p.rb, p.ka, p.la, p.ca,p.kb, p.lb, p.cb, p.m, p.g,p.c);
 myrhs = @(t,z) mydynamics(z);
 
 nguesses = 10;
@@ -72,19 +65,21 @@ i = 0;
 
 options = optimoptions('fsolve', 'FunctionTolerance', 1e-30, 'OptimalityTolerance',1e-8, 'MaxFunctionEvaluations', 10000,'MaxIterations', 10000,'Disp','off','Algorithm','levenberg-marquardt'); 
 
-for xguess = linspace(-11,11,nguesses)
-    for yguess = linspace(-11,11,nguesses)
-        i = i+1;
+for xguess = linspace(-11,11,nguesses)     % Try all these x guesses
+    for yguess = linspace(-11,11,nguesses) % For each x guess try these y guesses
+        i = i+1;  %count times through loop
         
-        [myroot,fval,exitflag] =fsolve(mydynamics,[xguess;yguess;0;0], options); 
-        if norm(fval)>1e-3
-            disp('Andy says; FSOLVE is not happy. We want fval to be close to zeros.'); 
-            fval,
-        else  
-            goodroots(i) = 1;  % selects the converged roots
-        end
+% Use FSOLVE to find x,y pairs that result in zdot = [0 0 0 0]' 
+[myroot,fval,exitflag] =fsolve(mydynamics,[xguess;yguess;0;0], options); 
+  if norm(fval)>1e-3  %exitflag< 1 
+     disp('Andy says; FSOLVE is not happy. We want fval to be close to zeros.'); 
+     fval, %This should be zero if FSOLVE did its job correctly.
   
-        myroots(:,i) = myroot;  %Store each found root in this array of roots
+  else  
+      goodroots(i) = 1;  % selects the converged roots
+  end
+  
+ myroots(:,i) = myroot;  %Store each found root in this array of roots
   
     end %end yguess loop
 end % end xguess loop
