@@ -2,7 +2,7 @@
 % Assignment-4; Problem-12 %
 % Tanay Srinivasa, 25 Jan 2025 %
 % Due Date: 11 Feb 2025 %
-% Time Spent on Problem: 1 Hours  %
+% Time Spent on Problem: 2 Hours  %
 
 clc;
 clear all;
@@ -81,19 +81,19 @@ for xguess = linspace(-11,11,nguesses)
             disp('Andy says; FSOLVE is not happy. We want fval to be close to zeros.'); 
             fval,
         else  
-            goodroots(i) = 1;  % selects the converged roots
+            goodroots(i) = 1;
         end
   
-        myroots(:,i) = myroot;  %Store each found root in this array of roots
+        myroots(:,i) = myroot;
   
-    end %end yguess loop
-end % end xguess loop
+    end
+end
 
-goodroots = logical(goodroots); % turn ones and zeros into logicals
+goodroots = logical(goodroots);
 
-myroots = myroots(:,goodroots); % only keep the converged roots
-myroots = round(myroots, 6); % round the root values so duplicates can be found
-myroots = unique(myroots','rows')'; % Only save unique roots
+myroots = myroots(:,goodroots);
+myroots = round(myroots, 6);
+myroots = unique(myroots','rows')';
 
 disp(['Number of converged optimizations is ' num2str(sum(goodroots))]);
 
