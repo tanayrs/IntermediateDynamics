@@ -12,12 +12,12 @@ close all;
 set(0,'DefaultAxesFontSize', 20);
 
 % Parameters %
-% p.m = 1; p.ka = 50; p.kb = 50; p.la = 5; p.lb = 5; p.g = 0; p.c = .2; 
-% p.ca = 1; p.cb = 1; p.ra = [3; 0]; p.rb = [-3; 0]; time_scale = 1;
+p.m = 1; p.ka = 50; p.kb = 50; p.la = 5; p.lb = 5; p.g = 0; p.c = .2; 
+p.ca = 1; p.cb = 1; p.ra = [3; 0]; p.rb = [-3; 0]; time_scale = 1;
 
 % Strange set of parameters
-p.m = 1; p.ka = 2; p.kb = 5; p.la = 5; p.lb = 7; p.g = 5; p.c = .2; 
-p.ca = 0; p.cb = 0; p.ra = [3; 0]; p.rb = [-3; 0]; time_scale = 1;
+% p.m = 1; p.ka = 2; p.kb = 5; p.la = 5; p.lb = 7; p.g = 5; p.c = .2; 
+% p.ca = 0; p.cb = 0; p.ra = [3; 0]; p.rb = [-3; 0]; time_scale = 1;
 
 % Initial Conditions %
 tstart = 0; tend = 10; tspan = [tstart, tend];
@@ -55,13 +55,12 @@ shg;
 
 %% Equilibrium
 
-rA = [0 ;  0] ;  rB = [3 ; 0];
-kA = 5;  LA = 5;  cA = 0  ;
-kB = 5;  LB = 5;  cB = 0  ;
-m  = 1;  g  = 1;  c  =  .2;
+p.rA = [3 ;  0] ;  p.rB = [-3 ; 0];
+p.kA = 50;  p.LA = 5;  p.cA = 1  ;
+p.kB = 50;  p.LB = 5;  p.cB = 1  ;
+p.m  = 1;  p.g  = 0;  p.c  =  .2;
 
-mydynamics = @(z)  ...
-                   myzdots(z,rA,rB, kA,LA, cA, kB,LB,cB,m,g,c);
+mydynamics = @(z) myzdots(z,p);
 
 myrhs = @(t,z) mydynamics(z);
 
@@ -70,30 +69,24 @@ myroots = zeros(4,nguesses^2);
 goodroots = zeros(nguesses^2,1);
 i = 0;
 
-options = optimoptions('fsolve', 'FunctionTolerance', 1e-30, 'OptimalityTolerance',1e-8, 'MaxFunctionEvaluations', 10000,'MaxIterations', 10000,'Disp','off','Algorithm','levenberg-marquardt'); 
+options = optimoptions('fsolve', 'FunctionTolerance', 1e-30, ...
+    'OptimalityTolerance',1e-8, 'MaxFunctionEvaluations', 10000, ...
+    'MaxIterations', 10000,'Disp','off','Algorithm','levenberg-marquardt'); 
 
 for xguess = linspace(-11,11,nguesses)
     for yguess = linspace(-11,11,nguesses)
         i = i+1;
         
         [myroot,fval,exitflag] =fsolve(mydynamics,[xguess;yguess;0;0], options); 
-        if norm(fval)>1e-3
-            disp('Andy says; FSOLVE is not happy. We want fval to be close to zeros.'); 
-            fval,
-        else  
+        if norm(fval) < 1e-9
             goodroots(i) = 1;
         end
-  
         myroots(:,i) = myroot;
-  
     end
 end
 
 goodroots = logical(goodroots);
-
-myroots = myroots(:,goodroots);
-myroots = round(myroots, 6);
-myroots = unique(myroots','rows')';
+myroots = unique(round(myroots(:,goodroots),6)','rows')';
 
 disp(['Number of converged optimizations is ' num2str(sum(goodroots))]);
 
@@ -107,11 +100,10 @@ grid on;
 hold off
 
 disp(['The ' num2str(nroots) ' equilibrium points have these [x; y; vx; vy] values:']);
-% disp(' (Each column is one root)')
 disp(myroots)
 
-%% Stability Analysis
 
+%% Stability Analysis
 whichroot = 1;
 zstar = myroots(:,whichroot);
 
