@@ -10,18 +10,8 @@
 % over time in the motion of masses.
 
 % For 10 time steps or greater, how sensitive is the system to z0? Its a
-% non-linear system, so given any z from the solution as z0, will it 
-% continue to follow the same trajectory, just delayed or advanced in time?
-
-% Comparing a small variation and large variation, the only difference in
-% the code is a uniform increase in all parameters by some factor, as
-% compared to in a large variation a standard normal random variable is
-% introduced, which now makes the system behave completely differently.
-% When this random vector is scaled by 1e-3, it changes the pattern, but
-% this pattern looks somewhat regular, for 1e-2 it starts to look
-% chaotic. For 1e-1 and higher it one mass shoots out to infinity.
-
-%%
+% non-linear system, so given any z from the solution as , will it continue to follow the
+% trajectory for
 clc;
 clear all;
 close all;
@@ -67,7 +57,7 @@ solution = ode45(rhs, tspan, z0, options);
 animate(solution, tspan, z0, time_scale);
 
 %% Very Different Initial Conditions
-z0 = z0 + (1e-1*randn(size(z0)));
+z0 = z0 + randn(size(z0));
 
 rhs = @(t, z) myrhs(z,t,p);
 
