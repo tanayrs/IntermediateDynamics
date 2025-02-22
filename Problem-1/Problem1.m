@@ -2,8 +2,10 @@
 % Assignment-1; Question-1 %
 % Tanay Srinivasa, 15 Jan 2025 %
 % Time Spend on Problem: 2 Hours (15-Jan-25: 10:00 AM to 10:40 AM, 2:00 PM to 3:10 PM) %
+% Reviewed on: 22 Feb 2025
 
-% Code Structure taken from Ruina Cornell Lec-3, ChatGPT was used to help with syntax for animation %
+
+% Code Structure taken from Ruina Cornell Lec-3, ChatGPT was used to help with syntax for animation.%
 
 % Plotting option as defined in Homework Guidelines %
 set(0,'DefaultAxesFontSize', 20)
