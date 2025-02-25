@@ -59,7 +59,7 @@ function [x, y] = minimize_distance(ra, rc, line1, line2)
         % Vector between points
         w = p2 - p1;
         
-        % Compute gradients
+        % Compute Loss Function
         grad_x = -2 * dot(w, line1);
         grad_y = 2 * dot(w, line2);
         
@@ -76,5 +76,3 @@ function [x, y] = minimize_distance(ra, rc, line1, line2)
         y = y_new;
     end
 end
-
-%% Part (d) %%

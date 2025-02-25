@@ -16,7 +16,7 @@ p.k = 100; p.n = (pi/4); p.m = 7;
 % Initial Conditions
 r0 = [-0.010000000000000; 0]; v0 = [0; -0.002963000000000]; z0 = [r0; v0];
 
-tstart = 0; tend = 100;
+tstart = 0; tend = 1000;
 tspan = [tstart, tend];
 
 % Define ODE system
@@ -35,7 +35,7 @@ plot_trajectory(solution, tspan);
 function myroots = find_roots(rhs)
     error_func = @(r) rootfinder(rhs, [r(1); 0; 0; r(2); r(3)]);
     
-    lb = [-inf, -inf, 1];  % Lower bounds (T must be >= 0.1)
+    lb = [-inf, -inf, 1];     % Lower bounds (T must be >= 0.1)
     ub = [inf, inf, inf];     % Upper bounds
     
     nguesses = 10;

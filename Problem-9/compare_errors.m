@@ -6,7 +6,7 @@ function retval = compare_errors(x_fun, y_fun, rhs, tspan, z0, p)
     for i = 1:length(steps)
         disp("Current Step Size: ");
         steps(i)
-        options = odeset('MaxStep',steps(i));
+        options = odeset('MaxStep',steps(i), 'RelTol', 1e-2, 'AbsTol', 1e-2);
         solution = ode45(rhs, tspan, z0, options);
 
         % Finding Error at t = 2 %

@@ -13,7 +13,7 @@ close all;
 set(0, 'DefaultAxesFontSize', 20);
 
 % Solve the ODE for the system %
-p.k = 4; p.m = 1; p.g = 9.81;
+p.k = 4; p.m = 1; p.g = 10;
 
 % Initial Conditions %
 tstart = 0; tend = 10; h = 1e-3;

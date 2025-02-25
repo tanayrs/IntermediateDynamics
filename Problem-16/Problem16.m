@@ -36,7 +36,7 @@ r10 = [0; 1.5]; r20 = -1.5*[sind(60); cosd(60)]; r30 = 1.5*[sind(60); -cosd(60)]
 
 v_scalar = sqrt(4*p.G*p.m/p.d);
 v10 = [v_scalar; 0]; v20 = v_scalar * [r20(2); -r20(1)]/norm(r20); v30 = v_scalar * [r30(2); -r30(1)]/norm(r30);
-z0 = [r10; r20; r30; v10; v20; v30];
+z0 = [r10; r20; r30; v10; v20; v30 + [0.1; 0]];
 
 time_period = 2*pi*sqrt(p.d^3/(16*p.G*p.m));
 time_scale = time_period/10;

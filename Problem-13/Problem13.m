@@ -104,7 +104,7 @@ disp(myroots)
 
 
 %% Stability Analysis
-whichroot = 1;
+whichroot = 2;
 zstar = myroots(:,whichroot);
 
 h = 1e-4;
