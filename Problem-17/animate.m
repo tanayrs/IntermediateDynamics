@@ -1,6 +1,6 @@
-function retval = animate_3particles(solution, tspan, z0, time_scale)
+function retval = animate(solution, tspan, z0, time_scale)
     % Unpacking values to calculate limits %
-    z_vals = deval(solution, linspace(tspan(1), tspan(2), 500));
+    z_vals = deval(solution, linspace(tspan(1), tspan(2), 10000));
     r1_vals = z_vals(1:2,:);
     r2_vals = z_vals(3:4,:);
     r3_vals = z_vals(5:6,:);

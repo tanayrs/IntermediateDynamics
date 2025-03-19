@@ -51,7 +51,7 @@ x = zarray(:,1); y = zarray(:,2);
 plot(x,y,'*'); axis equal;
 shg;
 
-% animate(solution, [tspan(1), tspan(end)], z0, p, time_scale)
+animate(solution, [tspan(1), tspan(end)], z0, p, time_scale)
 
 %% Equilibrium
 
