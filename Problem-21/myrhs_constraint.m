@@ -8,8 +8,9 @@ function zdot = myrhs_constraint(z,t,p)
     x1dot = z(3);
     x2dot = z(4);
 
-    A = [m1 0 -1; 0 m2 1; 1 -1 0];
-    acc_vec = A \ [0; F; 0];
+    A = A_matrix(m1, m2);
+    b = B_matrix(F);
+    acc_vec = A \ b;
 
     zdot = [x1dot; x2dot; acc_vec(1); acc_vec(2)];
 end

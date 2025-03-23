@@ -3,9 +3,9 @@ clear all;
 close all;
 
 %% Define Parameters %%
-p.m = 10; p.L = 1;
+p.m = 10; p.L = 1; p.g = 10;
 
-r0 = [-p.L/2; 0; p.L/2; 0]; v0 = [0; 1; 0; -1]; z0 = [r0; v0];
+r0 = [1; 0]; v0 = [0; 0]; z0 = [r0; v0];
 
 tend = 10; tspan = [0, tend];
 

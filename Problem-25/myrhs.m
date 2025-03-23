@@ -1,31 +1,43 @@
 function zdot = myrhs(z,t,p)
     m = p.m;
     
-    x1 = z(1);
-    y1 = z(2);
-    x2 = z(3);
-    y2 = z(4);
-    x1dot = z(5);
-    y1dot = z(6);
-    x2dot = z(7);
-    y2dot = z(8);
+    r1 = z(1:2);
+    r2 = z(3:4);
+    v1 = z(5:6);
+    v2 = z(7:8);
 
-    x = x1 - x2;
-    y = y1 - y2;
+    x1 = r1(1);
+    y1 = r1(2);
+    x2 = r2(1);
+    y2 = r2(2);
 
-    xdot = x1dot - x2dot;
-    ydot = y1dot - y2dot;
+    x1dot = v1(1);
+    y1dot = v1(2);
+    x2dot = v2(1);
+    y2dot = v2(2);
+
+    r = r1 - r2;
+    v = v1 - v2;
     
-    denom = sqrt((x^2) + (y^2));
+    denom = norm(r);
+    
+    if denom == 0
+        denom = eps;
+    end
 
-    A = [m  0  0  0   x/denom;
-         0  m  0  0   y/denom;
-         0  0  m  0  -x/denom;
-         0  0  0  m  -y/denom;
-         x -x  y -y    0    ];
+    A_hand = [m     0     0     0     r(1)/denom;
+         0     m     0     0     r(2)/denom;
+         0     0     m     0    -r(1)/denom;
+         0     0     0     m    -r(2)/denom;
+         r(1) -r(1)  r(2) -r(2) 0         ];
 
-    acc_vec = A \ [0; 0; 0; 0; - (xdot^2) - (ydot^2)];
+    A = A_matrix(m, x1, x2, y1, y2);
 
-    zdot = [x1dot; y1dot; x2dot; y2dot; 
-        acc_vec(1); acc_vec(2); acc_vec(3); acc_vec(4)];
+    % A_diff = A - A_hand;
+
+    b = B_matrix(x1dot, x2dot, y1dot, y2dot);
+
+    acc_vec = A \ b;
+
+    zdot = [ v1; v2; acc_vec(1:2); acc_vec(3:4)];
 end

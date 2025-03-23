@@ -1,5 +1,5 @@
 function zdot = myrhs_spring(z,t,p)
-    k = p.k; l0 = p.l0; m1 = p.m1; m2 = p.m2; F0 = p.F0;
+    k = p.k; l0 = p.l0; m1 = p.m1; m2 = p.m2; F0 = p.F0; omega = p.omega;
     
     F = F0 * sin(omega*t);
 

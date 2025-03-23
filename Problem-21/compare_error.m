@@ -5,6 +5,7 @@ function compare_error(solution, solution_dir, tspan)
 
     error = zvals_dir - zvals;
 
+    figure;
     plot(t, error(1,:), 'DisplayName', "Error in X1");
     hold on;
     plot(t, error(2,:), 'DisplayName', "Error in X2");

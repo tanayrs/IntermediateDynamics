@@ -2,21 +2,18 @@ function animate(solution, z0, time_scale)
     t = linspace(solution.x(1), solution.x(end), 1000);
     zvals = deval(solution,t);
 
-    x1_vals = zvals(1,:);
-    x2_vals = zvals(3,:);
-    y1_vals = zvals(2,:);
-    y2_vals = zvals(4,:);
+    x_vals = zvals(1,:);
+    y_vals = zvals(2,:);
 
     hold on;
     
-    xlim([min([x1_vals, x2_vals])-0.5, max([x1_vals, x2_vals])+0.5]);
+    xlim([min(x_vals)-0.5, max(x_vals)+0.5]);
     axis equal; 
 
-    m1 = plot(z0(1), 0, 'bo', 'MarkerFaceColor', 'b', 'MarkerSize', 10);
-    m2 = plot(z0(2), 0, 'ro', 'MarkerFaceColor', 'r', 'MarkerSize', 10);
+    m1 = plot(z0(1), z0(2), 'bo', 'MarkerFaceColor', 'b', 'MarkerSize', 10);
+    trajectory = plot(z0(1), z0(2), 'b--');
 
-    plot(x1_vals,y1_vals,'b--');
-    plot(x2_vals,y2_vals,'r--');
+    traj = [z0(1) z0(1); z0(2) z0(2)];
     
     grid on;
 
@@ -31,7 +28,10 @@ function animate(solution, z0, time_scale)
 
         z_curr = deval(solution, t_curr);
         set(m1, 'XData', z_curr(1), 'YData', z_curr(2));
-        set(m2, 'XData', z_curr(3), 'YData', z_curr(4));
+
+        traj(end+1,:) = [z_curr(1), z_curr(2)];
+        set(trajectory, 'XData', traj(:,1), 'YData', traj(:,2));
+
 
         drawnow;
     end
