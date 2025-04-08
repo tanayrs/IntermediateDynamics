@@ -10,7 +10,8 @@ function animate(solution, tspan, z0, p, time_scale)
     er1 = (sin(theta1)*i) - (cos(theta1)*j);
     er2 = (sin(theta2)*i) - (cos(theta2)*j);
     
-    link1 = plot([0,l1*er1(1)],[0,l1*er1(2)], 'w-','LineWidth',5);
+    link1 = plot([0,l1*er1(1)],[0,l1*er1(2)], 'w-','LineWidth',5, ...
+        'DisplayName',"Link 1");
     
     hold on;
     
@@ -22,7 +23,8 @@ function animate(solution, tspan, z0, p, time_scale)
     legend();
 
     link2 = plot([l1*er1(1),(l1*er1(1))+(l2*er2(1))],...
-        [l1*er1(2),(l1*er1(2))+(l2*er2(2))], 'w-','LineWidth',5);
+        [l1*er1(2),(l1*er1(2))+(l2*er2(2))], 'w-','LineWidth',5, ...
+        'DisplayName', "Link 2");
     
     rg1 = plot(d1*er1(1),d1*er1(2),'.','MarkerSize', 25,...
         'DisplayName','r_{G1}');

@@ -10,7 +10,8 @@ function zdot = myrhs(z, t, p)
     theta1ddot = theta1ddot_fn(Ig1,Ig2,d1,d2,g,l1,m1,m2,theta1,theta2,...
         theta1dot,theta2dot);
 
-    theta2ddot = theta2ddot_fn(Ig2,d2,g,m2,theta2);
+    theta2ddot = theta2ddot_fn(Ig1,Ig2,d1,d2,g,l1,m1,m2,theta1,theta2,...
+        theta1dot, theta2dot);
 
     zdot = [theta1dot; theta2dot; theta1ddot; theta2ddot];
 end
