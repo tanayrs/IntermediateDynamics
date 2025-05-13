@@ -28,7 +28,7 @@ solution = ode45(rhs,tspan,z0,options);
 % animate(solution, tspan, z0, p, time_scale);
 
 %% Energy Check %%
-[E1, E2] = energy_check(solution,p)
+[E1, E2] = energy_check(solution,p,"NE")
 
 %% Lagrange Equations %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -44,7 +44,7 @@ solution_le = ode45(rhs_le,tspan,z0,options);
 % animate(solution_le, tspan, z0, p, time_scale);
 
 %% Energy Check %%
-[E1, E2] = energy_check(solution_le,p)
+[E1, E2] = energy_check(solution_le,p,"LE")
 
 %% DAE %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -62,9 +62,7 @@ solution_dae = ode45(rhs_dae,tspan,z0,options);
 animate(solution_dae, tspan, z0, p, time_scale);
 
 %% Energy Check %%
-[E1, E2] = energy_check(solution_dae,p)
-
-
+[E1, E2] = energy_check(solution_dae,p,"DAE")
 
 %% Angle Check %%
 t_NE = solution.x;

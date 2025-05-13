@@ -85,11 +85,11 @@ aF = aF_E + aE;
 
 aG3 = (x3ddot*i) + (y3ddot*j);
 
-LMB_link3_LHS = -m3*g*j - (Ffx*i + Ffy*j) + (Rgx*i) + (Rgy*j);
+LMB_link3_LHS = -m3*g*j - (Ffx*i + Ffy*j) + (Rgx*i) * (Rgy*j);
 LMB_link3 = m3*aG3 - LMB_link3_LHS;
 
 % about G3 %
-AMB_link3_LHS = cross(rG3F, -(Ffx*i + Ffy*j)) + cross(rG3G, (Rgx*i) + (Rgy*j));
+AMB_link3_LHS = cross(rG3F, -(Ffx*i + Ffy*j)) + r(G3G, (Rgx*i) * (Rgy*j));
 Hdot_G3 = Ig3*theta3ddot;
 
 AMB_link3 = Hdot_G3 - dot(AMB_link3_LHS,k);
@@ -109,8 +109,7 @@ constraint3 = (x3ddot*i) + (y3ddot*j) + (l1*(theta1dot^2)*er1) - (l1*theta1ddot*
     (d3*(theta3dot^2)*er3) - (d3*theta3ddot*etheta3);
 
 % VG = VG %
-constraint4 = ((l3-d3)*theta3ddot*etheta3) - ((l3-d3)*(theta3dot^2)*er3) + ...
-    (x3ddot*i) + (y3ddot*j);
+constraint3 = ((l3-d3)*theta3ddot*etheta3)
 
 eqn1 = dot(LMB_link1,i);
 eqn2 = dot(LMB_link1,j);
@@ -127,8 +126,6 @@ eqn12 = dot(constraint2,i);
 eqn13 = dot(constraint2,j);
 eqn14 = dot(constraint3,i);
 eqn15 = dot(constraint3,j);
-eqn16 = dot(constraint4,i);
-eqn17 = dot(constraint4,j);
 
 eqn1 = simplify(eqn1);
 eqn2 = simplify(eqn2);
@@ -145,10 +142,8 @@ eqn12 = simplify(eqn12);
 eqn13 = simplify(eqn13);
 eqn14 = simplify(eqn14);
 eqn15 = simplify(eqn15);
-eqn16 = simplify(eqn16);
-eqn17 = simplify(eqn17);
 
-[A, b] = equationsToMatrix([eqn1, eqn2, eqn3, eqn4, eqn5, eqn6, eqn7, eqn8, eqn9, eqn10, eqn11, eqn12, eqn13, eqn14, eqn15, eqn16, eqn17], ...
+[A, b] = equationsToMatrix([eqn1, eqn2, eqn3, eqn4, eqn5, eqn6, eqn7, eqn8, eqn9, eqn10, eqn11, eqn12, eqn13, eqn14, eqn15], ...
     [theta1ddot, theta2ddot, theta3ddot, x1ddot, y1ddot, x2ddot, y2ddot, x3ddot, y3ddot, Rox, Roy, Rgx, Rgy, Fex, Fey, Ffx, Ffy]);
 
 matlabFunction(A,'File', 'A_matrix', 'Optimize', false);
