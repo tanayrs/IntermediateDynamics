@@ -1,6 +1,6 @@
 %% RO2102: Dynamics and Simulation
-% Assignment 8; Problem-30
-% By: Tanay Srinivasa, Time Spent: 2 Hours
+% Final Project; Problem-43-a
+% By: Tanay Srinivasa, Time Spent: 4 Hours
 
 clc;
 clear all;
