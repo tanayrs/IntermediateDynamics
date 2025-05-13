@@ -5,14 +5,26 @@ function zdot = myrhs_dae(z, t, p)
     theta1 = z(1);
     theta2 = z(2);
     theta3 = z(3);
-    theta1dot = z(4);
-    theta2dot = z(5);
-    theta3dot = z(6);
-
+    x1 = z(4);
+    y1 = z(5);
+    x2 = z(6);
+    y2 = z(7);
+    x3 = z(8);
+    y3 = z(9);
+    theta1dot = z(10);
+    theta2dot = z(11);
+    theta3dot = z(12);
+    x1dot = z(4);
+    y1dot = z(5);
+    x2dot = z(6);
+    y2dot = z(7);
+    x3dot = z(8);
+    y3dot = z(9);
+    
     A = A_matrix(Ig1,Ig2,Ig3,d1,d2,d3,l1,l2,m1,m2,m3,theta1,theta2,theta3);
     b = b_matrix(d1,d2,d3,g,l1,l2,m1,m2,m3,theta1,theta2,theta3,theta1dot,theta2dot,theta3dot);
 
     w = A\b;
 
-    zdot = [theta1dot; theta2dot; theta3dot; w(1); w(2); w(3)];
+    zdot = [theta1dot; theta2dot; theta3dot; x1dot; y1dot; x2dot; y2dot; x3dot; y3dot; w(1); w(2); w(3); w(4); w(5); w(6); w(7); w(8); w(9)];
 end

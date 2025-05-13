@@ -49,7 +49,7 @@ AMB_sys_LHS   = cross(r_g1_o,-m1*g*j) + cross(r_g2_o,-m2*g*j) + cross(r_g3_o, -m
 
 H1dot_o = cross(r_g1_o,m1*ag1)   + (Ig1*theta1ddot*k);
 H2dot_o = cross(r_g2_o,m2*ag2)   + (Ig2*theta2ddot*k);
-H3dot_o = cross(r_g3_o,m2*ag3)   + (Ig3*theta3ddot*k);
+H3dot_o = cross(r_g3_o,m3*ag3)   + (Ig3*theta3ddot*k);
 
 Hdot_o = H1dot_o + H2dot_o + H3dot_o;
 

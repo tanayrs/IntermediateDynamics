@@ -30,22 +30,6 @@ solution = ode45(rhs,tspan,z0,options);
 %% Energy Check %%
 [E1, E2] = energy_check(solution,p)
 
-%% DAE %%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%% Call RHS %%
-rhs_dae = @(t,z) myrhs_dae(z,t,p);
-
-%% Solve ODE %%
-options = odeset('AbsTol',1e-6,'RelTol',1e-6);
-solution_dae = ode45(rhs_dae,tspan,z0,options);
-
-%% Animate %%
-% animate(solution_dae, tspan, z0, p, time_scale);
-
-%% Energy Check %%
-[E1, E2] = energy_check(solution_dae,p)
-
 %% Lagrange Equations %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -61,6 +45,26 @@ solution_le = ode45(rhs_le,tspan,z0,options);
 
 %% Energy Check %%
 [E1, E2] = energy_check(solution_le,p)
+
+%% DAE %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Initial Conditions for DAE %%
+z0 = [pi/2; pi/4; pi/5; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0];
+%% Call RHS %%
+rhs_dae = @(t,z) myrhs_dae(z,t,p);
+
+%% Solve ODE %%
+options = odeset('AbsTol',1e-6,'RelTol',1e-6);
+solution_dae = ode45(rhs_dae,tspan,z0,options);
+
+%% Animate %%
+animate(solution_dae, tspan, z0, p, time_scale);
+
+%% Energy Check %%
+[E1, E2] = energy_check(solution_dae,p)
+
+
 
 %% Angle Check %%
 t_NE = solution.x;
