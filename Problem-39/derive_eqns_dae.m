@@ -5,8 +5,7 @@ close all;
 syms xg xgdot xgddot real;
 syms yg ygdot ygddot real;
 syms theta thetadot thetaddot real;
-syms phi1 phi1dot phi1ddot real;
-syms phi2 phi2dot phi2ddot real;
+syms phi1 phi2 real;
 syms d1 d2 m I F1 F2 real;
 
 
@@ -17,8 +16,11 @@ k = [0; 0; 1];
 lambda_hat = cos(theta)*i + sin(theta)*j;
 n_hat = -sin(theta)*i + cos(theta)*j;
 
-f1_hat = cos(phi1)*lambda_hat + sin(phi1)*n_hat;
-f2_hat = cos(phi2)*lambda_hat + sin(phi2)*n_hat;
+s1_hat = cos(phi1)*lambda_hat + sin(phi1)*n_hat;
+s2_hat = cos(phi2)*lambda_hat + sin(phi2)*n_hat;
+
+f1_hat = cross(k,s1_hat);
+f2_hat = cross(k,s2_hat);
 
 LMB_lhs = F1*f1_hat + F2*f2_hat;
 LMB = (m*(xgddot*i + ygddot*j)) - LMB_lhs;
@@ -29,8 +31,8 @@ AMB = (I*thetaddot*k) - AMB_lhs;
 Vc = xgdot*i + ygdot*j + cross(thetadot*k, -d1*lambda_hat);
 Vd = xgdot*i + ygdot*j + cross(thetadot*k, d2*lambda_hat);
 
-constraint1 = jacobian(dot(Vc,f1_hat),[xg, yg, xgdot,ygdot,theta,thetadot,phi1,phi1dot,phi2,phi2dot])*[xgdot, ygdot, xgddot,ygddot,thetadot,thetaddot,phi1dot,phi1ddot,phi2dot,phi2ddot]';
-constraint2 = jacobian(dot(Vd,f2_hat),[xg, yg, xgdot,ygdot,theta,thetadot,phi1,phi1dot,phi2,phi2dot])*[xgdot, ygdot, xgddot,ygddot,thetadot,thetaddot,phi1dot,phi1ddot,phi2dot,phi2ddot]';
+constraint1 = jacobian(dot(Vc,f1_hat),[xg, yg, xgdot,ygdot,theta,thetadot])*[xgdot, ygdot, xgddot,ygddot,thetadot,thetaddot]';
+constraint2 = jacobian(dot(Vd,f2_hat),[xg, yg, xgdot,ygdot,theta,thetadot])*[xgdot, ygdot, xgddot,ygddot,thetadot,thetaddot]';
 
 eqn1 = dot(LMB,i);
 eqn2 = dot(LMB,j);
@@ -40,6 +42,5 @@ eqn5 = constraint2;
 
 [A,b] = equationsToMatrix([eqn1,eqn2,eqn3,eqn4,eqn5],[xgddot,ygddot,thetaddot,F1,F2]);
 
-A
-
-b
+matlabFunction(A,'File','A_fn');
+matlabFunction(b,'File','b_fn');
