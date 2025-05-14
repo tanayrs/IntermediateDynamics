@@ -1,4 +1,4 @@
-function [E_tot1, E_tot2] = energy_check(solution, p)
+function [E_tot1, E_tot2] = energy_check(solution, p, type)
     m1 = p.m1; m2 = p.m2; Ig1 = p.Ig1; Ig2 = p.Ig2; d1 = p.d1; d2 = p.d2;
     l1 = p.l1; g = p.g;
     
@@ -7,7 +7,11 @@ function [E_tot1, E_tot2] = energy_check(solution, p)
     tend = solution.x(end);
 
     z = deval(solution,tstart);
-    theta1 = z(1); theta2 = z(2); theta1dot = z(3); theta2dot = z(4);
+    if type == "DAE"
+        theta1 = z(1); theta2 = z(2); theta1dot = z(7); theta2dot = z(8);
+    else
+        theta1 = z(1); theta2 = z(2); theta1dot = z(3); theta2dot = z(4);
+    end
     
     i = [1; 0; 0];
     j = [0; 1; 0];
@@ -36,7 +40,11 @@ function [E_tot1, E_tot2] = energy_check(solution, p)
 
     % Final
     z = deval(solution,tend);
-    theta1 = z(1); theta2 = z(2); theta1dot = z(3); theta2dot = z(4);
+    if type == "DAE"
+        theta1 = z(1); theta2 = z(2); theta1dot = z(7); theta2dot = z(8);
+    else
+        theta1 = z(1); theta2 = z(2); theta1dot = z(3); theta2dot = z(4);
+    end
     
     i = [1; 0; 0];
     j = [0; 1; 0];
