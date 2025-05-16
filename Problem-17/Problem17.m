@@ -31,7 +31,7 @@ p.G = 1; p.m = 1;
 
 r10 = [-0.9700046; 0.24308753]; r20 = -r10; r30 = [0; 0];
 v30 = [0.93240737; 0.86473146]; v10 = -v30/2; v20 = -v30/2;
-z0 = [r10; r20; r30; v10; v20; v30];
+z0 = [r10; r20; r30; v10; v20; v30+[0.1;0]];
 
 
 %% 2.1 Time Units
@@ -81,8 +81,8 @@ animate(solution, tspan, z0, time_scale);
 
 rng(42);
 
-time_scale = 10;
-tstart = 0; tend = 100; tspan = [tstart tend];
+time_scale = 100;
+tstart = 0; tend = 1000; tspan = [tstart tend];
 
 z0 = z0 + (1e-2*randn(size(z0)));
 v10 = z0(7:8); v20 = z0(9:10); v30 = z0(11:12);

@@ -12,12 +12,12 @@ close all;
 set(0,'DefaultAxesFontSize', 20);
 
 % Parameters %
-p.m = 1; p.ka = 50; p.kb = 50; p.la = 5; p.lb = 5; p.g = 0; p.c = .2; 
-p.ca = 1; p.cb = 1; p.ra = [3; 0]; p.rb = [-3; 0]; time_scale = 1;
+% p.m = 1; p.ka = 50; p.kb = 50; p.la = 5; p.lb = 5; p.g = 0; p.c = .2; 
+% p.ca = 1; p.cb = 1; p.ra = [3; 0]; p.rb = [-3; 0]; time_scale = 1;
 
 % Strange set of parameters
-% p.m = 1; p.ka = 2; p.kb = 5; p.la = 5; p.lb = 7; p.g = 5; p.c = .2; 
-% p.ca = 0; p.cb = 0; p.ra = [3; 0]; p.rb = [-3; 0]; time_scale = 1;
+p.m = 1; p.ka = 2; p.kb = 5; p.la = 5; p.lb = 7; p.g = 5; p.c = .2; 
+p.ca = 0; p.cb = 0; p.ra = [3; 0]; p.rb = [-3; 0]; time_scale = 1;
 
 % Initial Conditions %
 tstart = 0; tend = 10; tspan = [tstart, tend];

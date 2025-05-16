@@ -11,7 +11,7 @@ m = 100; r = 1;
 p.I1 = (1/4)*m*(r^2); p.I2 = (1/4)*m*(r^2); p.I3 = (1/2)*m*(r^2);
 time_scale = 1;
 
-z0 = [0;0;0;0;5;0;
+z0 = [0;0;0;0.01;0;5;
     1;0;0;
     0;1;0;
     0;0;1];
@@ -27,4 +27,4 @@ t = linspace(tspan(1), tspan(2), 1000);
 
 z_vals = deval(solution,t);
 
-animate(solution,z0,tspan,time_scale);
+animate_feynman(solution,z0,tspan,time_scale);

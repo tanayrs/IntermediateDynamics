@@ -1,4 +1,8 @@
 function animate(solution, z0, tspan, time_scale)
+% Changes to be made:
+% -> Line Stick out of the box, trace out the trajectory of the end of the
+%line
+% -> Change size of box based on inertia
     % Define cube vertices in body frame (centered at [0.5, 0.5, 0.5])
     rOb = [0; 0; 0]-0.5;
     rAb = [1; 0; 0]-0.5;
@@ -30,7 +34,7 @@ function animate(solution, z0, tspan, time_scale)
     % Create figure and set properties
     figure;
     hold on;
-    view(2);
+    view(3);
     axis equal;
     xlim([-2 2]);
     ylim([-2 2]);
